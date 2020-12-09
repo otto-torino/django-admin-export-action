@@ -53,9 +53,9 @@ def get_field_verbose_name(objects, path):
     for p in parts:
         field = model._meta.get_field(p)
         if field.verbose_name:
-            res.append(field.verbose_name)
+            res.append(str(field.verbose_name))
         else:
-            res.append(field.name)
+            res.append(str(field.name))
         if model._meta.get_field(p).related_model:
             model = model._meta.get_field(p).related_model
     return ' '.join(res)
