@@ -1,6 +1,6 @@
 # Django Admin Export Action
 
-Generic export action for Django's Admin
+Export action for Django's Admin
 
 ## Quickstart
 
@@ -10,23 +10,26 @@ Install Django Admin Export Action::
 pip install django-admin-export-action
 ```
 
-Include it on INSTALLED_APPS::
+Include it in INSTALLED_APPS::
 
 ```
-'admin_export_action',
+INSTALLED_APPS = [
+    # ...
+    'admin_export_action',
+]
 ```
 
-Add to urls:
+Add to `urlpatterns` in `urls.py`:
 
 ``` python 
-    url(r'^export_action/', include("export_action.urls", namespace="export_action")),
+path('export_action/', include("admin_export_action.urls", namespace="admin_export_action")),
 ```
 
 ## Configuration
 
 By default the export action will be added sitewide, which means for every app and every admin registered model.
 
-You can disable this behaviour and decide to add manually the export action only in the models you desired:
+You can disable this behaviour and decide to add manually the export action only for the models you desired:
 
 ``` python
 
