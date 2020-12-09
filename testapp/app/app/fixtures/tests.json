@@ -1,0 +1,280 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$216000$ByzWXcPM3dFf$0MiJuLs2I5x3N20YpXIDjrwC4zJeqWl4fDm2knodzsA=",
+        "last_login": "2020-12-09T08:49:46.198Z",
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "admin@otto.to.it",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2020-12-09T08:49:14.739Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "kralawjt8yc5uwlocizef3l2krh7h6cm",
+    "fields": {
+        "session_data": ".eJxVjEEOwiAUBe_C2hBoQcCl-56BPPggVQNJaVfGu2uTLnT7Zua9mMe2Fr_1tPiZ2IVJdvrdAuIj1R3QHfXWeGx1XebAd4UftPOpUXpeD_fvoKCXbx0MKanFACMwRKsgTdQuSyBn5aKxgKARpE1SZE3WdrT6nPIoM7SDY-8P60k4Ow:1kmvAQ:NMHwarDEluXipfjAkNxFOLeq9pUjEEh0c2xgZeO80e8",
+        "expire_date": "2020-12-23T08:49:46.206Z"
+    }
+},
+{
+    "model": "news.category",
+    "pk": 1,
+    "fields": {
+        "name": "Live"
+    }
+},
+{
+    "model": "news.category",
+    "pk": 2,
+    "fields": {
+        "name": "Sport"
+    }
+},
+{
+    "model": "news.tag",
+    "pk": 1,
+    "fields": {
+        "name": "live music",
+        "type": 1
+    }
+},
+{
+    "model": "news.tag",
+    "pk": 2,
+    "fields": {
+        "name": "football",
+        "type": 1
+    }
+},
+{
+    "model": "news.tag",
+    "pk": 3,
+    "fields": {
+        "name": "Maradona",
+        "type": 1
+    }
+},
+{
+    "model": "news.news",
+    "pk": 1,
+    "fields": {
+        "category": 1,
+        "date": "2020-12-09",
+        "datetime": null,
+        "title": "Lucio Dalla",
+        "link": "https://www.youtube.com/watch?v=CJEk72PJ5fo",
+        "image": "",
+        "content": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur vestibulum aliquam leo. Curabitur ullamcorper ultricies nisi. Morbi nec metus. Vivamus aliquet elit ac nisl.",
+        "share": true,
+        "status": 2,
+        "attachments_summary": "",
+        "videos_summary": ""
+    }
+},
+{
+    "model": "news.news",
+    "pk": 2,
+    "fields": {
+        "category": 2,
+        "date": "1986-06-22",
+        "datetime": null,
+        "title": "La mano de Dios",
+        "link": null,
+        "image": "",
+        "content": "In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit. Donec mi odio, faucibus at, scelerisque quis, convallis in, nisi.\r\n\r\nPellentesque dapibus hendrerit tortor. Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Phasellus magna. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.\r\n\r\nVestibulum eu odio. Suspendisse faucibus, nunc et pellentesque egestas, lacus ante convallis tellus, vitae iaculis lacus elit id tortor. Duis lobortis massa imperdiet quam. Fusce vel dui.\r\n\r\nVestibulum fringilla pede sit amet augue. Fusce fermentum odio nec arcu. Morbi mollis tellus ac sapien. Aenean commodo ligula eget dolor.",
+        "share": false,
+        "status": 1,
+        "attachments_summary": "",
+        "videos_summary": ""
+    }
+},
+{
+    "model": "news.video",
+    "pk": 1,
+    "fields": {
+        "news": 2,
+        "code": "1acm_-PDM_0",
+        "caption": "Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Nunc interdum lacus sit amet orci. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Nunc nonummy metus. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.",
+        "author_email": null
+    }
+},
+{
+    "model": "news.newstag",
+    "pk": 1,
+    "fields": {
+        "tag": 1,
+        "news": 1,
+        "created_on": "2020-12-09T08:54:08.431Z"
+    }
+},
+{
+    "model": "news.newstag",
+    "pk": 2,
+    "fields": {
+        "tag": 2,
+        "news": 2,
+        "created_on": "2020-12-09T08:55:59.741Z"
+    }
+},
+{
+    "model": "news.newstag",
+    "pk": 3,
+    "fields": {
+        "tag": 3,
+        "news": 2,
+        "created_on": "2020-12-09T09:46:15.895Z"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2020-12-09T08:52:28.548Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "category"
+        ],
+        "object_id": "1",
+        "object_repr": "Live",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2020-12-09T08:53:10.602Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "tag"
+        ],
+        "object_id": "1",
+        "object_repr": "live music",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2020-12-09T08:54:08.432Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "news"
+        ],
+        "object_id": "1",
+        "object_repr": "Lucio Dalla",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"news tag\", \"object\": \"live music on Lucio Dalla\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2020-12-09T08:54:22.041Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "category"
+        ],
+        "object_id": "2",
+        "object_repr": "Sport",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2020-12-09T08:55:33.759Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "tag"
+        ],
+        "object_id": "2",
+        "object_repr": "football",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2020-12-09T08:55:59.742Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "news"
+        ],
+        "object_id": "2",
+        "object_repr": "La mano de Dios",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"news tag\", \"object\": \"football on La mano de Dios\"}}, {\"added\": {\"name\": \"video\", \"object\": \"Aenean posuere, tortor sed cursus feugiat, nunc augue blandit nunc, eu sollicitudin urna dolor sagittis lacus. Nunc interdum lacus sit amet orci. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Nunc nonummy metus. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum.\"}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2020-12-09T09:46:13.234Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "tag"
+        ],
+        "object_id": "3",
+        "object_repr": "Maradona",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2020-12-09T09:46:15.895Z",
+        "user": [
+            "admin"
+        ],
+        "content_type": [
+            "news",
+            "news"
+        ],
+        "object_id": "2",
+        "object_repr": "La mano de Dios",
+        "action_flag": 2,
+        "change_message": "[{\"added\": {\"name\": \"news tag\", \"object\": \"Maradona on La mano de Dios\"}}]"
+    }
+}
+]

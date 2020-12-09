@@ -1,0 +1,98 @@
+{% extends 'admin/base_site.html' %}
+{% load i18n admin_urls static %}
+
+{% block title %}{% trans "Export" %} {{ opts.verbose_name_plural }} {{ block.super }}{% endblock title %}
+{% block bodyclass %}{{ block.super }} change-list{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static "admin/js/vendor/jquery/jquery.min.js" %}"></script>
+    <script src="{% static "admin/js/jquery.init.js" %}"></script>
+    <script type="text/javascript">
+        (function ($) {
+            window.show_fields = function (event, model_ct, field, path) {
+                var check_default = $("#check_all").is(':checked');
+                $(event.target.parentNode).load(location.pathname, $.param({
+                    related: 1,
+                    model_ct: model_ct,
+                    field: field,
+                    path: path,
+                    check_default: check_default
+                }));
+            };
+            $(function () {
+                $("#check_all").click(function () {
+                    var checked = !!this.checked;
+                    $('.check_field').prop('checked', checked);
+                });
+            });
+        }(django.jQuery));
+
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+        &rsaquo; <a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a>
+        &rsaquo; {% if has_change_permission %}
+        <a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}
+        {{ opts.verbose_name_plural|capfirst }}{% endif %}
+        &rsaquo; {% trans 'Export' %}
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <h1> {% trans "Export" %} {{ opts.verbose_name_plural }} ({{ queryset.count }}) </h1>
+    <div id="content-main">
+        <div id="changelist" class="module filtered">
+            <div id="toolbar">
+                {% for object in queryset|slice:":10" %}
+                    {{ object }}
+                    {% if not forloop.last %},{% endif %}
+                {% endfor %}
+                {% if queryset.count > 10 %}...{% endif %}
+            </div>
+            <form method="post" action="" id="changelist-form">
+                {% csrf_token %}
+                <table class="table table-striped table-sm">
+                    <tr class="export_table">
+                        <th class="export_table" style="width: 30px;">
+                            <input type="checkbox" id="check_all">
+                        </th>
+                        <th class="export_table">
+                            <label for="check_all">{% trans "Select all" %}</label>
+                        </th>
+                    </tr>
+
+                    {% include "export_action/fields.html" %}
+                </table>
+                <div style="margin-top: 2rem;">
+                    <label for="__format">{% trans "Format" %}
+                        <select name="__format">
+                            <option value="xlsx">XLSX</option>
+                            <option value="csv">CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="html">HTML</option>
+                        </select>
+                    </label>
+                    <label for="__raw_choices">{% trans "Display choices raw value" %}
+                        <select name="__raw_choices">
+                            <option value="0" selected>{% trans "No" %}</option>
+                            <option value="1">{% trans "Yes" %}</option>
+                        </select>
+                    </label>
+                    <label for="__include_header">{% trans "Include header" %}
+                        <select name="__include_header">
+                            <option value="0">{% trans "No" %}</option>
+                            <option value="1" selected>{% trans "Yes" %}</option>
+                        </select>
+                    </label>
+                    <input type="submit" class="btn btn-secondary btn-sm" value="{% trans "Export" %}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
