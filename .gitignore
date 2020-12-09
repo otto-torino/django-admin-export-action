@@ -32,9 +32,6 @@ pip-log.txt
 nosetests.xml
 htmlcov
 
-# Translations
-*.mo
-
 # Editors
 .mr.developer.cfg
 .project
