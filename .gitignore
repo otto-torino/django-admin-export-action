@@ -1,6 +1,7 @@
 *.py[cod]
 __pycache__
 *.db
+tags
 
 # C extensions
 *.so
