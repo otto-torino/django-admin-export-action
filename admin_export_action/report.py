@@ -168,7 +168,7 @@ def build_sheet(data, ws, sheet_name='report', header=None, widths=None):
                     row[i] = text_type(item.decode('utf-8', 'ignore'))
             elif type(item) is dict:
                 row[i] = text_type(item)
-            elif type(item).__name__ == 'UUID':
+            elif type(item).__name__ == 'UUID' or type(item).__name__ == '__proxy__':
                 row[i] = str(item)
             elif type(item).__name__ == 'list':
                 row[i] = json.dumps(item)
