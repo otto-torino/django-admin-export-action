@@ -1,0 +1,59 @@
+# Translation to pt_BR.
+# Copyright (C) 2016
+# This file is distributed under the same license as the PACKAGE package.
+# Fernando Macedo <fgmacedo@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-09 14:22+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-br\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: admin.py:24
+msgid "Export selected items..."
+msgstr "Exportar itens selecionados..."
+
+#: templates/export_action/export.html:4 templates/export_action/export.html:41
+#: templates/export_action/export.html:47
+#: templates/export_action/export.html:92
+msgid "Export"
+msgstr "Exportar"
+
+#: templates/export_action/export.html:36
+msgid "Home"
+msgstr "Home"
+
+#: templates/export_action/export.html:65
+msgid "Select all"
+msgstr "Selecionar todos"
+
+#: templates/export_action/export.html:72
+msgid "Format"
+msgstr "Formato"
+
+#: templates/export_action/export.html:80
+msgid "Display choices raw value"
+msgstr "Valor bruto das opções de exibição"
+
+#: templates/export_action/export.html:82
+#: templates/export_action/export.html:88
+msgid "No"
+msgstr "Não"
+
+#: templates/export_action/export.html:83
+#: templates/export_action/export.html:89
+msgid "Yes"
+msgstr "Sim"
+
+#: templates/export_action/export.html:86
+msgid "Include header"
+msgstr "Incluir cabeçalho"

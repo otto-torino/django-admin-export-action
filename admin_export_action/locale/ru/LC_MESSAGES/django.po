@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: django-export-action\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-12-09 14:22+0100\n"
+"PO-Revision-Date: 2017-04-21 14:28+0300\n"
+"Last-Translator: 1 <1>\n"
+"Language-Team:  <romanov@infolabs.ru>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: admin.py:24
+msgid "Export selected items..."
+msgstr "Экспортировать выделенные элементы"
+
+#: templates/export_action/export.html:4 templates/export_action/export.html:41
+#: templates/export_action/export.html:47
+#: templates/export_action/export.html:92
+msgid "Export"
+msgstr "Экспортировать"
+
+#: templates/export_action/export.html:36
+msgid "Home"
+msgstr "Начало"
+
+#: templates/export_action/export.html:65
+msgid "Select all"
+msgstr "Выбрать все"
+
+#: templates/export_action/export.html:72
+msgid "Format"
+msgstr "Формат"
+
+#: templates/export_action/export.html:80
+msgid "Display choices raw value"
+msgstr "Отображать исходное значение выбора"
+
+#: templates/export_action/export.html:82
+#: templates/export_action/export.html:88
+msgid "No"
+msgstr "нет"
+
+#: templates/export_action/export.html:83
+#: templates/export_action/export.html:89
+msgid "Yes"
+msgstr "да"
+
+#: templates/export_action/export.html:86
+msgid "Include header"
+msgstr "Включить заголовок"

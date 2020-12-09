@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+recursive-include admin_export_action/templates *
+recursive-include admin_export_action/locale *
+
+recursive-exclude * __pycache__
+recursive-exclude * *.pyc

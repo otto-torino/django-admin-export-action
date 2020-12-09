@@ -1,0 +1,26 @@
+# Config file for automatic testing at travis-ci.org
+language: python
+python:
+  - 3.6
+install:
+  - pip install --upgrade pip
+  - pip install $DJANGO_VERSION --upgrade
+  - pip install openpyxl
+  - pip install django-baton
+  - pip install easy_thumbnails
+  - pip install django-mptt
+  - django-admin.py --version
+before_script:
+  - cd testapp/app && python manage.py migrate && python manage.py runserver &
+  - sleep 3
+env:
+  global:
+    - DJANGO_VERSION='Django>=2.2,<3.0'
+    - DJANGO_VERSION='Django>=3.0'
+script:
+  - cd testapp/app && python manage.py test
+branches:
+  only:
+    - master
+    - debug/tests
+sudo: false
