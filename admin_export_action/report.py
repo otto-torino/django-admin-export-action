@@ -2,6 +2,7 @@
 
 from __future__ import unicode_literals, absolute_import
 
+import json
 from collections import namedtuple
 from itertools import chain
 import csv
@@ -167,6 +168,10 @@ def build_sheet(data, ws, sheet_name='report', header=None, widths=None):
                     row[i] = text_type(item.decode('utf-8', 'ignore'))
             elif type(item) is dict:
                 row[i] = text_type(item)
+            elif type(item).__name__ == 'UUID':
+                row[i] = str(item)
+            elif type(item).__name__ == 'list':
+                row[i] = json.dumps(item)
         try:
             ws.append(row)
         except ValueError as e:
