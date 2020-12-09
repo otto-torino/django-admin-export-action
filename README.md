@@ -1,5 +1,10 @@
 # Django Admin Export Action
 
+
+![Version](https://img.shields.io/github/v/tag/otto-torino/django-admin-export-action?label=version)
+[![Build status](https://travis-ci.com/otto-torino/django-admin-export-action.svg?branch=master)](https://travis-ci.com/github/otto-torino/django-admin-export-action)
+![License](https://img.shields.io/pypi/l/django-admin-export-action)
+
 Export action for Django's Admin
 
 ## Quickstart
