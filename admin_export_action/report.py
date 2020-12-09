@@ -39,7 +39,7 @@ def get_field_display_value(objects, path, raw):
             model = model._meta.get_field(p).model
 
         if i == len(parts) - 1:
-            if model._meta.get_field(p).choices is not None:
+            if model._meta.get_field(p).choices and len(model._meta.get_field(p).choices):
                 return dict(model._meta.get_field(p).choices)[raw]
             else:
                 return raw
@@ -52,7 +52,7 @@ def get_field_verbose_name(objects, path):
     model = objects.model
     for p in parts:
         field = model._meta.get_field(p)
-        if field.verbose_name:
+        if hasattr(field, 'verbose_name') and field.verbose_name:
             res.append(str(field.verbose_name))
         else:
             res.append(str(field.name))
