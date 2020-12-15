@@ -9,6 +9,7 @@ import csv
 import re
 
 from django.http import HttpResponse, JsonResponse
+from django.utils.module_loading import import_string
 try:
     from django.utils.text import force_text
 except:
@@ -24,6 +25,7 @@ from openpyxl.writer.excel import save_virtual_workbook
 from six import BytesIO, text_type
 
 from .introspection import get_model_from_path_string
+from .config import get_config
 
 
 DisplayField = namedtuple("DisplayField", "path field")
@@ -147,6 +149,13 @@ def build_sheet(data, ws, sheet_name='report', header=None, widths=None):
     first_row = 1
     column_base = 1
 
+    func = None
+    if get_config('VALUE_TO_XLSX_CELL') is not None:
+        try:
+            func = import_string(get_config('VALUE_TO_XLSX_CELL'))
+        except Exception as e:
+            pass
+
     ws.title = re.sub(r'\W+', '', sheet_name)[:30]
     if header:
         for i, header_cell in enumerate(header):
@@ -160,18 +169,24 @@ def build_sheet(data, ws, sheet_name='report', header=None, widths=None):
         for i in range(len(row)):
             item = row[i]
             # If item is a regular string
-            if isinstance(item, str):
-                # Change it to a unicode string
-                try:
+            success = False
+            if func:
+                success, res = func(item)
+            if success:
+                row[i] = res
+            else:
+                if isinstance(item, str):
+                    # Change it to a unicode string
+                    try:
+                        row[i] = text_type(item)
+                    except UnicodeDecodeError:
+                        row[i] = text_type(item.decode('utf-8', 'ignore'))
+                elif type(item) is dict:
                     row[i] = text_type(item)
-                except UnicodeDecodeError:
-                    row[i] = text_type(item.decode('utf-8', 'ignore'))
-            elif type(item) is dict:
-                row[i] = text_type(item)
-            elif type(item).__name__ == 'UUID' or type(item).__name__ == '__proxy__':
-                row[i] = str(item)
-            elif type(item).__name__ == 'list':
-                row[i] = json.dumps(item)
+                elif type(item).__name__ == 'UUID' or type(item).__name__ == '__proxy__':
+                    row[i] = str(item)
+                elif type(item).__name__ == 'list':
+                    row[i] = json.dumps(item)
         try:
             ws.append(row)
         except ValueError as e:

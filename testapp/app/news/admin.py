@@ -127,3 +127,9 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     pass
+
+
+def value_to_xlsx_cell(value):
+    if (value == 'convert'):
+        return True, 'converted'
+    return False, None

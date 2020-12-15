@@ -53,6 +53,28 @@ class MyModelAdmin(models.ModelAdmin):
 
 ```
 
+Convert any value to its xlsx representation can be a nightmare, and you may always find something weird you haven't considered.
+In order to let you fix every case, you can define an hook which is called when adding a value to a cell:
+
+``` python
+
+# settings.py
+
+ADMIN_EXPORT_ACTION = {
+    'VALUE_TO_XLSX_CELL': 'news.admin.my_convert_function'
+}
+
+# admin.py
+def my_convert_function(value):
+    if (value == 'convert'):
+        return True, 'converted'
+    elif (type(value) == list):
+        return json.dumps(value)
+    return False, None
+```
+
+If called, the hook is called first, it shoud return a tuple `success, value`. If `success` is `True`, then the returned `value` is used, otherwise the default conversions are performed.
+
 ## Usage
 
 Go to an admin page where the export action is enabled, select objects, run the action.

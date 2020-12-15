@@ -29,7 +29,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 ADMIN_EXPORT_ACTION = {
-    'ENABLE_SITEWIDE': False
+    'ENABLE_SITEWIDE': False,
+    'VALUE_TO_XLSX_CELL': 'news.admin.value_to_xlsx_cell'
 }
 
 INSTALLED_APPS = [

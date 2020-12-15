@@ -1,21 +1,77 @@
 # -- encoding: UTF-8 --
 import json
+import uuid
 
 from admin_export_action import report
+from admin_export_action.admin import export_selected_objects
+from admin_export_action.config import default_config, get_config
+
+from django.contrib.admin.sites import AdminSite
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.utils.http import urlencode
 from news.models import Attachment, Category, News, NewsTag, Video
+from news.admin import NewsAdmin
+
+
+class FakeDict(object):
+
+    def __getitem__(self, key):
+        return object()
+
+
+class WS(object):
+    def __init__(self):
+        self.rows = []
+        self.cells = []
+        self.column_dimensions = FakeDict()
+
+    def cell(self, row, column):
+        pass
+
+    def append(self, row):
+        self.rows.append(row)
+
+
+class FakeQueryset(object):
+    def __init__(self, num):
+        self.num = num
+        self.model = News
+
+    def values_list(self, field, flat=True):
+        return [i for i in range(1, self.num)]
 
 
 class AdminExportActionTest(TestCase):
     fixtures = ["tests.json"]
 
+    def test_config(self):
+        self.assertEqual(default_config.get('ENABLE_SITEWIDE'), True)
+        self.assertEqual(get_config('ENABLE_SITEWIDE'), False)
+
+        with self.settings(ADMIN_EXPORT_ACTION=None):
+            self.assertEqual(get_config('ENABLE_SITEWIDE'), True)
+
+    def test_export_selected_objects_session(self):
+        factory = RequestFactory()
+        request = factory.get('/news/admin/')
+        request.session = {}
+        modeladmin = NewsAdmin(model=News, admin_site=AdminSite())
+        qs = FakeQueryset(2000)
+
+        self.assertEqual(len(request.session), 0)
+        export_selected_objects(modeladmin, request, qs)
+        self.assertEqual(len(request.session), 1)
+        els = list(request.session.items())
+        self.assertEqual(els[0][1], qs.values_list('id'))
+
     def test_get_field_verbose_name(self):
         res = report.get_field_verbose_name(News.objects, 'tags__name')
         assert res == 'all tags verbose name'
+        res = report.get_field_verbose_name(News.objects, 'share')
+        assert res == 'share'
 
     def test_list_to_method_response_should_return_200_and_correct_values(
             self):
@@ -217,3 +273,13 @@ class AdminExportActionTest(TestCase):
             response = self.client.post(url, data=data)
             assert response.status_code == 200
             assert response.content
+
+    def test_build_sheet_convert_function(self):
+        data = [
+            ['1', 5, 'convert', 9, {"foo": "bar"}, [1, 2], uuid.UUID("12345678123456781234567812345678")],
+        ]
+
+        ws = WS()
+
+        report.build_sheet(data, ws, sheet_name='report', header=None, widths=None)
+        self.assertEqual(ws.rows, [['1', 5, 'converted', 9, "{'foo': 'bar'}", '[1, 2]', '12345678-1234-5678-1234-567812345678']])
