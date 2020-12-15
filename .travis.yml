@@ -1,7 +1,10 @@
 # Config file for automatic testing at travis-ci.org
+dist: focal
 language: python
 python:
-  - 3.6
+  - "3.6"
+  - "3.7"
+  - "3.8"
 install:
   - pip install --upgrade pip
   - pip install $DJANGO_VERSION --upgrade
@@ -10,15 +13,14 @@ install:
   - pip install easy_thumbnails
   - pip install django-mptt
   - django-admin.py --version
-before_script:
-  - cd testapp/app && python manage.py migrate && python manage.py runserver &
-  - sleep 3
 env:
   global:
     - DJANGO_VERSION='Django>=2.2,<3.0'
     - DJANGO_VERSION='Django>=3.0'
 script:
   - cd testapp/app && python manage.py test
+after_success:
+  - codecov -e DJANGO_VERSION
 branches:
   only:
     - master
