@@ -76,6 +76,20 @@ def my_convert_function(value):
 
 If called, the hook is called first, it shoud return a tuple `success, value`. If `success` is `True`, then the returned `value` is used, otherwise the default conversions are performed.
 
+The intermediate admin page used to select the fields to be exported needs the extra context each admin page has. But such context depends on your `admin_site` instance, for example if you use `django-baton` the admin site is different from the default one.    
+For this reason you can specify the path for your admin app:
+
+``` python
+
+# settings.py
+
+ADMIN_EXPORT_ACTION = {
+    'ADMIN_SITE_PATH': 'baton.autodiscover.admin'
+}
+```
+
+This assures the site title and site header ar the ones you see in normal admin pages.
+
 ## Usage
 
 Go to an admin page where the export action is enabled, select objects, run the action.
