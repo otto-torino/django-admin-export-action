@@ -2,6 +2,7 @@
 from django.conf import settings
 
 default_config = {
+    'ADMIN_SITE_PATH': None,
     'ENABLE_SITEWIDE': True,
     'VALUE_TO_XLSX_CELL': None,
 }
