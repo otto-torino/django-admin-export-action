@@ -2,11 +2,21 @@
 
 from __future__ import absolute_import, unicode_literals
 
-from django.contrib import admin
+import importlib
+
+from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.views.generic import TemplateView
 
 from . import introspection, report
+
+if hasattr(settings,
+           'ADMIN_EXPORT_ACTION') and settings.ADMIN_EXPORT_ACTION.get(
+               'ADMIN_SITE_PATH', None) is not None:
+    admin = importlib.import_module(
+        settings.ADMIN_EXPORT_ACTION.get('ADMIN_SITE_PATH'))
+else:
+    from django.contrib import admin
 
 
 class AdminExport(TemplateView):
@@ -43,6 +53,15 @@ class AdminExport(TemplateView):
         context[
             'related_fields'] = introspection.get_relation_fields_from_model(
                 model_class)
+
+        # extra context
+        try:
+            model_admin = admin.site._registry[model_class]
+        except KeyError:
+            raise ValueError("Model %r not registered with admin" %
+                             model_class)
+        context.update(model_admin.admin_site.each_context(self.request))
+
         context.update(introspection.get_fields(model_class, field_name, path))
         return context
 
