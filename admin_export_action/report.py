@@ -7,6 +7,7 @@ from collections import namedtuple
 from itertools import chain
 import csv
 import re
+from datetime import datetime
 
 from django.http import HttpResponse, JsonResponse
 from django.utils.module_loading import import_string
@@ -175,7 +176,9 @@ def build_sheet(data, ws, sheet_name='report', header=None, widths=None):
             if success:
                 row[i] = res
             else:
-                if isinstance(item, str):
+                if isinstance(item, datetime):
+                    row[i] = item.replace(tzinfo=None)
+                elif isinstance(item, str):
                     # Change it to a unicode string
                     try:
                         row[i] = text_type(item)
