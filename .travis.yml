@@ -8,11 +8,11 @@ python:
 install:
   - pip install -r testapp/app/requirements.txt
   - pip install $DJANGO_VERSION --upgrade
-  - django-admin.py --version
 env:
   global:
     - DJANGO_VERSION='Django>=2.2,<3.0'
     - DJANGO_VERSION='Django>=3.0'
+    - DJANGO_VERSION='Django>=4.0'
 script:
   - cd testapp/app && python manage.py test
   - coverage run --source admin_export_action manage.py test
