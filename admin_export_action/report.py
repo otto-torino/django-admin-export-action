@@ -14,7 +14,10 @@ from django.utils.module_loading import import_string
 try:
     from django.utils.text import force_text
 except:
-    from django.utils.encoding import force_text
+    try:
+        from django.utils.encoding import force_text
+    except:
+        from django.utils.encoding import force_str as force_text
 from django.template.loader import render_to_string
 from django.utils import timezone
 
