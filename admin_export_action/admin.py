@@ -1,9 +1,11 @@
 import uuid
+import json
 from django.contrib import admin
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.utils.translation import gettext_lazy as _
+from django.core.serializers.json import DjangoJSONEncoder
 from .config import get_config
 
 
@@ -14,7 +16,7 @@ def export_selected_objects(modeladmin, request, queryset):
 
     if len(selected) > 1000:
         session_key = "export_action_%s" % uuid.uuid4()
-        request.session[session_key] = selected
+        request.session[session_key] =  json.dumps(selected, cls=DjangoJSONEncoder)
         return HttpResponseRedirect("%s?ct=%s&session_key=%s" % (url, ct.pk, session_key))
     else:
         return HttpResponseRedirect(
