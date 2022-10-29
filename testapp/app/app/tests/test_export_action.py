@@ -65,7 +65,8 @@ class AdminExportActionTest(TestCase):
         export_selected_objects(modeladmin, request, qs)
         self.assertEqual(len(request.session), 1)
         els = list(request.session.items())
-        self.assertEqual(els[0][1], qs.values_list('id'))
+        selected_ids = json.loads(els[0][1])
+        self.assertEqual(selected_ids, qs.values_list('id'))
 
     def test_get_field_verbose_name(self):
         res = report.get_field_verbose_name(News.objects, 'tags__name')
