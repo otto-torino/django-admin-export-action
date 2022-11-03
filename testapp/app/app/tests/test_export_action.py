@@ -12,7 +12,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.test import TestCase, RequestFactory
 from django.urls import reverse
 from django.utils.http import urlencode
-from news.models import Attachment, Category, News, NewsTag, Video
+from news.models import News, NewsTag
 from news.admin import NewsAdmin
 
 
