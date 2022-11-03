@@ -3,6 +3,7 @@
 from __future__ import absolute_import, unicode_literals
 
 import importlib
+import json
 
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
@@ -26,6 +27,8 @@ class AdminExport(TemplateView):
     def get_queryset(self, model_class):
         if self.request.GET.get("session_key"):
             ids = self.request.session[self.request.GET["session_key"]]
+            if type(ids) == str:
+                ids = json.loads(ids)
         else:
             ids = self.request.GET['ids'].split(',')
         try:
