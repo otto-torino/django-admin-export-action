@@ -2,7 +2,7 @@ asgiref==3.5.2
 cachetools==4.1.1
 certifi==2020.12.5
 chardet==3.0.4
-codecov==2.1.12
+codecov==2.1.13
 coverage==5.3
 Django==4.1.1
 django-baton==2.4.1
