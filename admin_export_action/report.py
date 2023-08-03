@@ -24,7 +24,6 @@ from django.utils import timezone
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
-from openpyxl.writer.excel import save_virtual_workbook
 
 from six import BytesIO, text_type
 
@@ -225,7 +224,7 @@ def build_xlsx_response(wb, title="report"):
     """ Take a workbook and return a xlsx file response """
     title = generate_filename(title, '.xlsx')
     myfile = BytesIO()
-    myfile.write(save_virtual_workbook(wb))
+    wb.save(myfile)
     response = HttpResponse(
         myfile.getvalue(),
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
