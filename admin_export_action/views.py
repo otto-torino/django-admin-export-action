@@ -53,9 +53,9 @@ class AdminExport(TemplateView):
         context['opts'] = model_class._meta
         context['queryset'] = queryset
         context['model_ct'] = self.request.GET['ct']
-        context[
-            'related_fields'] = introspection.get_relation_fields_from_model(
-                model_class)
+
+        related = introspection.get_relation_fields_from_model(model_class)
+        context['related_fields'] = sorted(related, key=lambda x: x.verbose_name if hasattr(x, 'verbose_name') else x.get_accessor_name())
 
         # extra context
         try:
@@ -63,9 +63,13 @@ class AdminExport(TemplateView):
         except KeyError:
             raise ValueError("Model %r not registered with admin" %
                              model_class)
+
         context.update(model_admin.admin_site.each_context(self.request))
 
-        context.update(introspection.get_fields(model_class, field_name, path))
+        struct = introspection.get_fields(model_class, field_name, path)
+        context.update({
+            "fields": sorted(struct.get("fields"), key=lambda x: x.verbose_name if hasattr(x, 'verbose_name') else x.name),
+        })
         return context
 
     def post(self, request, **kwargs):
