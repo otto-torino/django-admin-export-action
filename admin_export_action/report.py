@@ -24,9 +24,9 @@ from django.utils import timezone
 from openpyxl.styles import Font
 from openpyxl.utils import get_column_letter
 from openpyxl.workbook import Workbook
-from openpyxl.writer.excel import save_virtual_workbook
+from tempfile import NamedTemporaryFile
 
-from six import BytesIO, text_type
+from six import text_type
 
 from .introspection import get_model_from_path_string
 from .config import get_config
@@ -224,14 +224,17 @@ def list_to_workbook(data, title='report', header=None, widths=None):
 def build_xlsx_response(wb, title="report"):
     """ Take a workbook and return a xlsx file response """
     title = generate_filename(title, '.xlsx')
-    myfile = BytesIO()
-    myfile.write(save_virtual_workbook(wb))
-    response = HttpResponse(
-        myfile.getvalue(),
-        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = 'attachment; filename=%s' % title
-    response['Content-Length'] = myfile.tell()
-    return response
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    with NamedTemporaryFile() as tmp:
+        wb.save(tmp.name)
+        tmp.seek(0)
+        response = HttpResponse(
+            tmp.read(),
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename=%s' % title
+        response['Content-Length'] = tmp.tell()
+
+        return response
 
 
 def list_to_xlsx_response(data, title='report', header=None,
