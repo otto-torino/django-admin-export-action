@@ -11,7 +11,7 @@ REPO_URL = 'http://github.com/otto-torino/django-admin-export-action'
 
 setup(
     name='django-admin-export-action',
-    version='0.3.1',
+    version='0.3.2',
     packages=['admin_export_action'],
     include_package_data=True,
     license='MIT License',
@@ -41,6 +41,8 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
         'Topic :: Software Development',
     ],
     project_urls={
