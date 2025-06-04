@@ -2,14 +2,14 @@
 dist: focal
 language: python
 python:
-  - "3.8"
-  - "3.9"
+  - "3.10"
+  - "3.11"
+  - "3.12"
 install:
   - pip install -r testapp/app/requirements.txt
   - pip install $DJANGO_VERSION --upgrade
 env:
   global:
-    - DJANGO_VERSION='Django>=3.0'
     - DJANGO_VERSION='Django>=4.0'
     - DJANGO_VERSION='Django>=5.0'
 script:
