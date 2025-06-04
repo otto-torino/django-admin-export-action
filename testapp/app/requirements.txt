@@ -1,8 +1,8 @@
 asgiref==3.8.1
 certifi==2025.4.26
 charset-normalizer==3.4.2
-codecov==2.1.13
-coverage==7.8.2
+codecov
+coverage
 Django==5.2.2
 django-baton==5.0.0
 django-js-asset==3.1.2
