@@ -1,8 +1,7 @@
 # Django Admin Export Action
 
-
 ![Version](https://img.shields.io/github/v/tag/otto-torino/django-admin-export-action?label=version)
-[![Build status](https://travis-ci.com/otto-torino/django-admin-export-action.svg?branch=master)](https://travis-ci.com/github/otto-torino/django-admin-export-action)
+[![Build status](https://app.travis-ci.com/otto-torino/django-admin-export-action.svg?token=fp5hqwJQgwHKLpsjsZ3L&branch=master)](https://travis-ci.com/github/otto-torino/django-admin-export-action)
 ![License](https://img.shields.io/github/license/otto-torino/django-admin-export-action)
 [![Coverage](https://codecov.io/gh/otto-torino/django-admin-export-action/branch/master/graph/badge.svg)](https://codecov.io/gh/otto-torino/django-admin-export-action)
 
@@ -27,7 +26,7 @@ INSTALLED_APPS = [
 
 Add to `urlpatterns` in `urls.py`:
 
-``` python 
+``` python
 path('export_action/', include("admin_export_action.urls", namespace="admin_export_action")),
 ```
 
@@ -76,7 +75,7 @@ def my_convert_function(value):
 
 If called, the hook is called first, it shoud return a tuple `success, value`. If `success` is `True`, then the returned `value` is used, otherwise the default conversions are performed.
 
-The intermediate admin page used to select the fields to be exported needs the extra context each admin page has. But such context depends on your `admin_site` instance, for example if you use `django-baton` the admin site is different from the default one.    
+The intermediate admin page used to select the fields to be exported needs the extra context each admin page has. But such context depends on your `admin_site` instance, for example if you use `django-baton` the admin site is different from the default one.
 For this reason you can specify the path for your admin app:
 
 ``` python
@@ -95,6 +94,7 @@ This assures the site title and site header ar the ones you see in normal admin 
 Go to an admin page where the export action is enabled, select objects, run the action.
 
 In the next page:
+
 - select the fields you want to export
 - select the output format
 - select whether to get raw choices values or not
@@ -103,10 +103,10 @@ In the next page:
 
 ## Features
 
-* Generic or ready to use action to enable export data from Admin.
-* Automatic traversal of model relations.
-* Selection of fields to export.
-* Can export to XSLx, CSV, JSON and HTML.
+- Generic or ready to use action to enable export data from Admin.
+- Automatic traversal of model relations.
+- Selection of fields to export.
+- Can export to XSLx, CSV, JSON and HTML.
 
 ## Running Tests
 
@@ -116,7 +116,6 @@ Does the code actually work?
     source <YOURVIRTUALENV>/bin/activate
     (myenv) $ pip install -r requirements.txt
     (myenv) $ python manage.py test
-
 
 ## Security
 
