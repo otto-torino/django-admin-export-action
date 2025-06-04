@@ -11,6 +11,7 @@ env:
   global:
     - DJANGO_VERSION='Django>=3.0'
     - DJANGO_VERSION='Django>=4.0'
+    - DJANGO_VERSION='Django>=5.0'
 script:
   - cd testapp/app && python manage.py test
   - coverage run --source admin_export_action manage.py test
